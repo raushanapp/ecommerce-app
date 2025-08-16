@@ -1,7 +1,6 @@
-import React,{ Component } from 'react'
-// import reactLogo from './assets/react.svg'
+import React from 'react'
 import './App.css'
-import HomePage from './Components/HomePage.Component'
+import HomePage from './pages/homepage/HomePage.Components';
 
 const App = () => {
   
