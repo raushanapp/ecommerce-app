@@ -1,19 +1,39 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore ,doc, getDoc,collection, setDoc,addDoc} from "firebase/firestore";
 
 const config = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: "ecommerce-project-94e90.firebaseapp.com",
-    projectId: "ecommerce-project-94e90",
-    storageBucket: "ecommerce-project-94e90.firebasestorage.app",
-    messagingSenderId: "500976829823",
-    appId: "1:500976829823:web:c9ee5b65a1068bb35b064a",
-    measurementId: "G-Q7DMX81TZX"
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket:import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId:import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
+
 const app = initializeApp(config);
 export const auth = getAuth(app);
-export const firestore = getFirestore(app);
+export const firestoreDB = getFirestore(app);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ "prompt": "select_account" });
 export const signInWithGoogle = () => signInWithPopup(auth, provider);
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+    try {
+        const userRef = doc(firestoreDB, "users", `${userAuth.uid}`);
+        const userSnapshot = await getDoc(userRef);
+        if (!userSnapshot.exists()) {
+            const { displayName, email } = userAuth;
+            const createdAt = new Date().toString();
+            try {
+                await setDoc(userRef, { displayName, email, createdAt, ...additionalData });
+            } catch (error) {
+                console.log(error.message, "error creating user  firestone data base");
+            }
+        } 
+        return userRef;
+    } catch (error) {
+        console.log(error,"====DB")
+    }
+}

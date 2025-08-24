@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/crown.svg?react";
 import { auth } from "../../firebase/firebase.utils";
 
-const Header = ({currentUser}) => (
+const Header = ({ currentUser }) => (
     <div className="header">
         <Link className="logo-container" to="/" >
             <Logo className="logo" />
