@@ -34,6 +34,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         } 
         return userRef;
     } catch (error) {
-        console.log(error,"====DB")
+        console.log(error, "====DB");
     }
 }

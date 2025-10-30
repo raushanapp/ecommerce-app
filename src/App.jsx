@@ -6,7 +6,7 @@ import ShopPage from './pages/shop/ShopPage.Component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-import {onSnapshot,doc} from "firebase/firestore"
+import {onSnapshot} from "firebase/firestore"
 
 
 class App extends React.Component  {
@@ -16,7 +16,6 @@ class App extends React.Component  {
       currentUser: null,
     }
   }
-  
   //  here unsubscribe
   unsubscribeFromAuth = null;
 

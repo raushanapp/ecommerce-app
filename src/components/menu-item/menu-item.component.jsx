@@ -17,4 +17,5 @@ const MenuItem = ({ id,title,imageUrl,size,linkUrl,history,match }) => (
         </div>
     </div>
 )
-export default withReactRouter(MenuItem);
+MenuItem.withRouter = withReactRouter(MenuItem);
+export default MenuItem;

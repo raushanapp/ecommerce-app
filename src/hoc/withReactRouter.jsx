@@ -1,11 +1,12 @@
 import React from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-const withReactRouter=(Component) => {
+const withReactRouter = (components) => {
     return  (props) => {
         const navigate = useNavigate();
         const location = useLocation();
         const params = useParams();
+        const Component = components;
         return (
             <Component
                 {...props}
